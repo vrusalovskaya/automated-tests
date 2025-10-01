@@ -2,6 +2,7 @@
 
 This repository contains an **automated test framework** for [Rail Ninja](https://rail.ninja), covering both **UI** and **API** testing with **Java 17**.  
 It automates passenger form validation, timetable search endpoints, and search history features.
+All tests are annotated and integrated with **Allure** to provide **human-readable reports**.  
 
 ---
 
@@ -16,7 +17,7 @@ It automates passenger form validation, timetable search endpoints, and search h
 - [JUnit 5](https://junit.org/junit5/) – test framework  
 - [Selenium](https://www.selenium.dev/) / [Selenide](https://selenide.org/) – UI automation  
 - [RestAssured](https://rest-assured.io/) – API testing  
-- [Allure Reports](https://allurereport.org/) – test reporting 
+- [Allure Reports](https://allurereport.org/) – test reporting  
 
 ---
 
@@ -74,6 +75,32 @@ mvn -Dtest=task1.TimetableApiTest test
 mvn -Dtest=task2.PassengerFormTests test
 mvn -Dtest=task3.SearchHistoryApiTests test
 ```
+---
+
+## 🔹 Run Tests with Allure Enabled  
+Run the tests using Maven:  
+```bash
+mvn clean test
+```
+This generates raw results in: 
+```bach
+target/allure-results
+```
+2. Generate & Open Report
+If you have Allure CLI installed:
+```bash
+allure serve target/allure-results
+```
+This will build the report and open it in your browser.
+
+4.  Generate Report Without Opening
+```bash
+allure generate target/allure-results -o target/allure-report
+```
+Then manually open: 
+```bash
+allure open target/allure-report
+```
 
 ---
 
@@ -103,4 +130,10 @@ mvn -Dtest=task3.SearchHistoryApiTests test
   - `/trains/order/timetable`  
   - `/v9/trains/order/timetable`  
 - API endpoints required **cookie handling** & **Base64-encoded history data**.  
+
+---
+
+## 📸 Screenshots of successful execution
+<img width="812" height="324" alt="image" src="https://github.com/user-attachments/assets/4cafba29-52c3-4356-908f-928c00c15bd1" />
+<img width="1280" height="622" alt="image" src="https://github.com/user-attachments/assets/2267560f-87cd-46ff-ba55-d443d0d31002" />
 
