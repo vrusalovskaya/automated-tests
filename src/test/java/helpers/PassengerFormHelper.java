@@ -13,7 +13,7 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.Set;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class PassengerFormHelper {
     private final WebDriver DRIVER;
@@ -182,7 +182,7 @@ public class PassengerFormHelper {
         } else if (currentUrl.contains("/trains/order/timetable")) {
 
             WebElement seatButton = findFirstVisible(By.xpath("//button[contains(.,'Select Seats')]"));
-            assertNotNull("No visible 'Select Seats' button found", seatButton);
+            assertNotNull(seatButton, "No visible 'Select Seats' button found");
             ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center'});", seatButton);
             wait.until(ExpectedConditions.elementToBeClickable(seatButton));
             seatButton.click();

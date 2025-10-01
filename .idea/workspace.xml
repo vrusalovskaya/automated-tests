@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b9ba86fd-aae8-48c6-b587-1782d37df177" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;vrusalovskaya&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/vrusalovskaya/automated-tests.git&quot;,
+    &quot;accountId&quot;: &quot;e9582785-26f1-4c45-aa48-13dc22463137&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="33TGhprYQG2HebexoIz1cgdVvrU" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "JUnit.NameDisplayInHeaderTest.executor": "Run",
+    "JUnit.TimetableApiTest.executor": "Debug",
+    "Maven.AutomatedTests [-Dtest=NameDisplayInHeaderTest...].executor": "Run",
+    "Maven.AutomatedTests [-Dtest=TimetableApiTest...].executor": "Run",
+    "Maven.AutomatedTests [-U,-DskipTests=false,-e...].executor": "Run",
+    "Maven.AutomatedTests [-U,-DskipTests=false...].executor": "Run",
+    "Maven.AutomatedTests [clean,install].executor": "Run",
+    "Maven.AutomatedTests [io.qameta.allure:allure-maven:2.16.1:report].executor": "Run",
+    "Maven.AutomatedTests [io.qameta.allure:allure-maven:report].executor": "Run",
+    "Maven.AutomatedTests [io.qameta.allure:allure-maven:serve].executor": "Run",
+    "Maven.AutomatedTests [test].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true"
+  },
+  "keyToStringList": {
+    "GitStage.ChangesTree.GroupingKeys": [
+      "directory",
+      "module",
+      "repository"
+    ]
+  }
+}]]></component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="mvn -U -DskipTests=false test" />
+      <command value="mvn -U -DskipTests=false -e -X test" />
+      <command value="mvn clean install" />
+      <command value="mvn -Dtest=TimetableApiTest test" />
+      <command value="mvn io.qameta.allure:allure-maven:2.16.1:report" />
+      <command value="mvn -Dtest=NameDisplayInHeaderTest test" />
+      <command value="mvn io.qameta.allure:allure-maven:report" />
+      <command value="mvn test" />
+      <command value="mvn io.qameta.allure:allure-maven:serve" />
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="NameDisplayInHeaderTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="AutomatedTests" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="task1.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="task1" />
+      <option name="MAIN_CLASS_NAME" value="task1.NameDisplayInHeaderTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.NameDisplayInHeaderTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b9ba86fd-aae8-48c6-b587-1782d37df177" name="Changes" comment="" />
+      <created>1759333772361</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1759333772361</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/task1/TimetableApiTest.java</url>
+          <line>35</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
