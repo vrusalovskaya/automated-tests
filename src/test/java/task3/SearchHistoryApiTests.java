@@ -1,5 +1,6 @@
 package task3;
 
+import io.qameta.allure.*;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -14,6 +15,8 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
+@Epic("Search History API Tests")
+@Feature("API Endpoint Verification")
 public class SearchHistoryApiTests {
 
     private static final String BASE_URL = "https://back.rail.ninja";
@@ -29,6 +32,8 @@ public class SearchHistoryApiTests {
     }
 
     @Test
+    @Description("Check that /station/history returns 200 and JSON data")
+    @Severity(SeverityLevel.CRITICAL)
     public void testHistoryEndpointReturns200AndJson() {
         String cookieValue = encodeHistoryCookie("""
             [
@@ -59,6 +64,8 @@ public class SearchHistoryApiTests {
     }
 
     @Test
+    @Description("Verify that departure and arrival stations are correctly returned from the search history API")
+    @Severity(SeverityLevel.CRITICAL)
     public void testDepartureAndArrivalStationsCorrect() {
         String cookieValue = encodeHistoryCookie("""
             [
@@ -92,6 +99,8 @@ public class SearchHistoryApiTests {
     }
 
     @Test
+    @Description("Verify that departure and arrival stations are correctly returned from the search history API")
+    @Severity(SeverityLevel.CRITICAL)
     public void testDepartureDateCorrect() {
         String cookieValue = encodeHistoryCookie("""
             [
@@ -122,6 +131,8 @@ public class SearchHistoryApiTests {
     }
 
     @Test
+    @Description("Verify that an empty search history cookie returns an empty response list")
+    @Severity(SeverityLevel.MINOR)
     public void testEmptyCookieReturnsEmptyHistory() {
         Response response = given()
                 .cookie("search_history", "")
@@ -135,6 +146,8 @@ public class SearchHistoryApiTests {
     }
 
     @Test
+    @Description("Verify that multiple search entries are correctly returned from the search history API")
+    @Severity(SeverityLevel.NORMAL)
     public void testMultipleSearchesReturned() {
         String cookieValue = encodeHistoryCookie("""
             [

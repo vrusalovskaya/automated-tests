@@ -1,5 +1,6 @@
 package helpers;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -23,6 +24,7 @@ public class PassengerFormHelper {
         this.WAIT = wait;
     }
 
+    @Step("Open passenger form: from {departureStation} to {arrivalStation} on {date}")
     public void openPassengerForm(String departureStation, String arrivalStation, LocalDate date) throws InterruptedException {
         acceptCookiesIfPresent(2);
         enterStation("departure_station", departureStation);
@@ -60,7 +62,7 @@ public class PassengerFormHelper {
         selectFlexibleFare(DRIVER);
     }
 
-
+    @Step("Accept cookies if present")
     private void acceptCookiesIfPresent(long timeoutSeconds) {
         try {
             new WebDriverWait(DRIVER, Duration.ofSeconds(timeoutSeconds)).until(
@@ -72,6 +74,7 @@ public class PassengerFormHelper {
         }
     }
 
+    @Step("Enter station in input {inputId}: {stationName}")
     private void enterStation(String inputId, String stationName) {
         WebElement input = WAIT.until(ExpectedConditions.elementToBeClickable(By.id(inputId)));
         input.clear();
@@ -107,6 +110,7 @@ public class PassengerFormHelper {
                 input, stationName);
     }
 
+    @Step("Pick date: {targetDate}")
     private void pickDate(LocalDate targetDate) throws InterruptedException {
         WebElement dateWrapper = WAIT.until(ExpectedConditions.elementToBeClickable(
                 By.cssSelector("div.ant-picker-input")));
@@ -137,11 +141,13 @@ public class PassengerFormHelper {
         dayCell.click();
     }
 
+    @Step("Select first visible element")
     private WebElement findFirstVisible(By locator) {
         List<WebElement> elements = WAIT.until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
         return elements.stream().filter(WebElement::isDisplayed).findFirst().orElse(null);
     }
 
+    @Step("Select flexible fare on timetable page")
     private void selectFlexibleFare(WebDriver driver) throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 

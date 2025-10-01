@@ -1,6 +1,7 @@
 package task1;
 
 import helpers.PassengerFormHelper;
+import io.qameta.allure.*;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -16,6 +17,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.time.LocalDate;
 
+@Epic("Passenger Form Tests")
+@Feature("UI Form Interaction")
 class NameDisplayInHeaderTest {
     private static WebDriver driver;
     private static WebDriverWait wait;
@@ -34,6 +37,8 @@ class NameDisplayInHeaderTest {
     }
 
     @Test
+    @Description("Check that the passenger's name updates in the header after typing")
+    @Severity(SeverityLevel.CRITICAL)
     void testNameDisplayInHeader() throws InterruptedException {
         PassengerFormHelper helper = new PassengerFormHelper(driver, wait);
         helper.openPassengerForm("Mecca", "Medina",

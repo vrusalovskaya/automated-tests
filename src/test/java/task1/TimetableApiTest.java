@@ -1,20 +1,24 @@
 package task1;
 
 import helpers.ApiHelper;
+import io.qameta.allure.*;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
-import static org.junit.Assert.*;
-
+@Epic("Timetable API Tests")
+@Feature("API Endpoint Verification")
 public class TimetableApiTest {
 
     @Test
+    @Description("Check that the /timetable endpoint returns trains with correct stations and dates")
+    @Severity(SeverityLevel.CRITICAL)
     public void testTimetable_v2_returns_expected_trains() {
         String body = """
                 {
@@ -31,42 +35,41 @@ public class TimetableApiTest {
 
         Response resp = ApiHelper.postTimetableSearch(body);
 
-        assertEquals("Unexpected status code", 200, resp.getStatusCode());
+        Assertions.assertEquals(200, resp.getStatusCode(), "Unexpected status code");
 
         String ct = resp.getContentType();
-        assertNotNull("Content-Type header is missing", ct);
-        assertTrue("Content-Type should start with 'application/json' but was: " + ct,
-                ct.toLowerCase().startsWith("application/json"));
+        Assertions.assertNotNull(ct, "Content-Type header is missing");
+        Assertions.assertTrue(ct.toLowerCase().startsWith("application/json"), "Content-Type should start with 'application/json' but was: " + ct);
 
         JsonPath json = resp.jsonPath();
 
         String topDep = json.getString("departure_station.single_name");
         String topArr = json.getString("arrival_station.single_name");
-        assertEquals("Top-level departure_station.single_name mismatch", "Mecca", topDep);
-        assertEquals("Top-level arrival_station.single_name mismatch", "Medina", topArr);
+        Assertions.assertEquals("Mecca", topDep, "Top-level departure_station.single_name mismatch");
+        Assertions.assertEquals("Medina", topArr, "Top-level arrival_station.single_name mismatch");
 
         LocalDate expectedDate = LocalDate.parse("05.11.2025", DateTimeFormatter.ofPattern("dd.MM.yyyy"));
 
         Map<String, ?> trains = json.getMap("trains");
-        assertNotNull("Response must contain 'trains' object", trains);
-        assertFalse("Trains map must not be empty", trains.isEmpty());
+        Assertions.assertNotNull(trains, "Response must contain 'trains' object");
+        Assertions.assertFalse(trains.isEmpty(), "Trains map must not be empty");
 
         for (String trainKey : trains.keySet()) {
             String depName = json.getString("trains." + trainKey + ".departure_station.single_name");
             String arrName = json.getString("trains." + trainKey + ".arrival_station.single_name");
             String departureDatetime = json.getString("trains." + trainKey + ".departure_datetime");
 
-            assertNotNull(String.format("Train %s: departure_station.single_name is null", trainKey), depName);
-            assertNotNull(String.format("Train %s: arrival_station.single_name is null", trainKey), arrName);
-            assertNotNull(String.format("Train %s: departure_datetime is null", trainKey), departureDatetime);
+            Assertions.assertNotNull(depName, String.format("Train %s: departure_station.single_name is null", trainKey));
+            Assertions.assertNotNull(arrName, String.format("Train %s: arrival_station.single_name is null", trainKey));
+            Assertions.assertNotNull(departureDatetime, String.format("Train %s: departure_datetime is null", trainKey));
 
-            assertTrue(String.format("Train %s: expected departure station 'Mecca' but was '%s'", trainKey, depName), depName.startsWith("Mecca"));
-            assertTrue(String.format("Train %s: expected arrival station 'Medina' but was '%s'", trainKey, arrName), arrName.startsWith("Medina"));
+            Assertions.assertTrue(depName.startsWith("Mecca"), String.format("Train %s: expected departure station 'Mecca' but was '%s'", trainKey, depName));
+            Assertions.assertTrue(arrName.startsWith("Medina"), String.format("Train %s: expected arrival station 'Medina' but was '%s'", trainKey, arrName));
 
             OffsetDateTime odt = OffsetDateTime.parse(departureDatetime);
             LocalDate actualDate = odt.toLocalDate();
-            assertEquals(String.format("Train %s: expected departure date %s but was %s",
-                    trainKey, expectedDate, actualDate), expectedDate, actualDate);
+            Assertions.assertEquals(expectedDate, actualDate, String.format("Train %s: expected departure date %s but was %s",
+                    trainKey, expectedDate, actualDate));
         }
     }
 }

@@ -1,6 +1,7 @@
 package task2;
 
 import helpers.PassengerFormHelper;
+import io.qameta.allure.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,12 +18,15 @@ import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.greaterThan;
 
+@Epic("Passenger Form Tests")
+@Feature("UI Form Interaction")
 public class PassengerFormTests {
 
     private static WebDriver driver;
     private static WebDriverWait wait;
 
     @BeforeEach
+    @Step("Open passenger form before each test")
     public void setUp() throws InterruptedException {
         driver = new ChromeDriver();
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -34,6 +38,7 @@ public class PassengerFormTests {
     }
 
     @AfterEach
+    @Step("Close browser after each test")
     public void tearDown() {
         if (driver != null) {
             try {
@@ -43,6 +48,8 @@ public class PassengerFormTests {
     }
 
     @Test
+    @Description("Verify that the Clear button resets all fields")
+    @Severity(SeverityLevel.CRITICAL)
     public void testClearButtonResetsForm() {
         fillPassengerForm();
 
@@ -69,6 +76,8 @@ public class PassengerFormTests {
     }
 
     @Test
+    @Description("Check validation errors when required fields are empty")
+    @Severity(SeverityLevel.NORMAL)
     public void testValidationOfRequiredFields() {
         clickContinueButton();
         List<WebElement> errors = wait.until(ExpectedConditions
@@ -77,6 +86,8 @@ public class PassengerFormTests {
     }
 
     @Test
+    @Description("Confirm Email field appears after typing email")
+    @Severity(SeverityLevel.MINOR)
     public void testConfirmEmailFieldAppears() {
         By emailLocator = By.id("checkout-passengers-form_clientDetails_user_email");
         WebElement emailInput = wait.until(ExpectedConditions.presenceOfElementLocated(emailLocator));
@@ -88,6 +99,8 @@ public class PassengerFormTests {
     }
 
     @Test
+    @Description("Verify that the passenger form can be successfully submitted with valid data")
+    @Severity(SeverityLevel.CRITICAL)
     void testSuccessfulSubmission() {
         fillPassengerForm();
 
@@ -104,6 +117,8 @@ public class PassengerFormTests {
     }
 
     @Test
+    @Description("Verify that the 'Confirm Email' field shows an error when it does not match the 'Email' field")
+    @Severity(SeverityLevel.NORMAL)
     public void testConfirmEmailFieldValidation() {
         By emailLocator = By.id("checkout-passengers-form_clientDetails_user_email");
         WebElement emailInput = wait.until(ExpectedConditions.presenceOfElementLocated(emailLocator));
@@ -119,7 +134,7 @@ public class PassengerFormTests {
         Assertions.assertEquals("Please repeat your email", error.getText().trim());
     }
 
-
+    @Step("Fill passenger form with default data")
     private void fillPassengerForm() {
 
         By nameLocator = By.id("checkout-passengers-form_passengersCategories_adult_0_full_name");
@@ -146,6 +161,7 @@ public class PassengerFormTests {
         dobSelects.get(2).sendKeys("1990", Keys.ENTER);
     }
 
+    @Step("Click the Continue button on the passenger form")
     private void clickContinueButton() {
         By continueBtnLocator = By.xpath("//form[@id='checkout-passengers-form']//button[.//span[text()='Continue']]");
         WebElement continueButton = wait.until(ExpectedConditions.elementToBeClickable(continueBtnLocator));
